@@ -1,0 +1,4 @@
+chaincodes:
+  Xooa-Get-Set:
+    path: /
+    language: go
