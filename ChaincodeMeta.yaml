@@ -1,4 +1,4 @@
 chaincodes:
   Xooa-Get-Set:
-    path: /
+    path: /sacc/ 
     language: go
