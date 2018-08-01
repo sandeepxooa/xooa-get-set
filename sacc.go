@@ -16,7 +16,7 @@ import (
 // SimpleAsset implements a simple chaincode to manage an asset
 type SimpleAsset struct {
 }
-
+// ...... checking if commit id gets updated
 // Init is called during chaincode instantiation to initialize any
 // data. Note that chaincode upgrade also calls this function to reset
 // or to migrate data.
