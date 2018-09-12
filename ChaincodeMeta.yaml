@@ -1,9 +1,11 @@
-Name: Get-Set
-AppInfo: Xooa Get Set Chaincode Application
 chaincodes:
-  Xooa-Get-Set:
+  Xooa-Get-Set-Root:
+    Name: Get-Set-Root
+    AppInfo: Xooa Get Set Chaincode Application
     path: /
     language: go
-  Xooa-Get-Set-Root:
+  Xooa-Get-Set:
+    Name: Get-Set-sacc
+    AppInfo: Xooa Get Set Chaincode Application
     path: /sacc/
     language: go  

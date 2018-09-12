@@ -32,6 +32,8 @@ func (t *SimpleAsset) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 	// Extract the function and args from the transaction proposal
 	fn, args := stub.GetFunctionAndParameters()
 
+	fmt.Println("invoke is running " + fn)
+
 	var result string
 	var err error
 	if fn == "set" {
@@ -42,7 +44,7 @@ func (t *SimpleAsset) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-
+	fmt.Println("invoke returning " + result)
 	// Return the result as success payload
 	return shim.Success([]byte(result))
 }
@@ -50,6 +52,7 @@ func (t *SimpleAsset) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 // Set stores the asset (both key and value) on the ledger. If the key exists,
 // it will override the value with the new one
 func set(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+	fmt.Println("- start set value")
 	if len(args) != 2 {
 		return "", fmt.Errorf("Incorrect arguments. Expecting a key and a value")
 	}
@@ -58,11 +61,13 @@ func set(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("Failed to set asset: %s", args[0])
 	}
+	fmt.Println("- end set value")
 	return args[1], nil
 }
 
 // Get returns the value of the specified asset key
 func get(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+	fmt.Println("- start get value")
 	if len(args) != 1 {
 		return "", fmt.Errorf("Incorrect arguments. Expecting a key")
 	}
@@ -75,6 +80,7 @@ func get(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	if value == nil {
 		return "", fmt.Errorf("Asset not found: %s", args[0])
 	}
+	fmt.Println("- end get value")
 	return string(value), nil
 }
 
