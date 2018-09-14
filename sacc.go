@@ -33,7 +33,7 @@ func (t *SimpleAsset) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 	fn, args := stub.GetFunctionAndParameters()
 
 	//fmt.Println("invoke is running " + fn)
-
+	fmt.Printf("%v", args)
 	channelId := stub.GetChannelID();
 	 fmt.Println("invoke is running " + fn+ " - Caller ::" + channelId)
 
