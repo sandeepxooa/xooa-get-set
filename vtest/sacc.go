@@ -21,7 +21,6 @@
  // data. Note that chaincode upgrade also calls this function to reset
  // or to migrate data.
  func (t *SimpleAsset) Init(stub shim.ChaincodeStubInterface) peer.Response {
-	 
 	 return shim.Success(nil)
  }
  
@@ -33,54 +32,19 @@
 	 fn, args := stub.GetFunctionAndParameters()
  
 	 fmt.Println("invoke is running " + fn)
- 
-	 var result string
-	 var err error
-	 if fn == "set" {
-		 result, err = set(stub, args)
-	 } else { // assume 'get' even if fn is nil
-		 result, err = get(stub, args)
-	 }
-	 if err != nil {
-		 return shim.Error(err.Error())
-	 }
-	 fmt.Println("invoke returning " + result)
-	 // Return the result as success payload
-	 return shim.Success([]byte(result))
+	 return get(stub, args)
  }
  
- // Set stores the asset (both key and value) on the ledger. If the key exists,
- // it will override the value with the new one
- func set(stub shim.ChaincodeStubInterface, args []string) (string, error) {
-	 fmt.Println("- start set value")
-	 if len(args) != 2 {
-		 return "", fmt.Errorf("Incorrect arguments. Expecting a key and a value")
-	 }
- 
-	 err := stub.PutState(args[0], []byte(args[1]))
-	 if err != nil {
-		 return "", fmt.Errorf("Failed to set asset: %s", args[0])
-	 }
-	 fmt.Println("- end set value")
-	 return args[1], nil
- }
  
  // Get returns the value of the specified asset key
- func get(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+ func get(stub shim.ChaincodeStubInterface, args []string) peer.Response  {
 	 fmt.Println("- start get value")
 	 if len(args) != 1 {
-		 return "", fmt.Errorf("Incorrect arguments. Expecting a key")
+		 return shim.Error("Incorrect arguments. Expecting a key")
 	 }
  
-	 value, err := stub.InvokeChaincode("sandeepxooahyuwn6yvqq", args, "chus-east-1-3446d311-ec4d-4114-a27f-fa147557d718");
-	 if err != nil {
-		 return "", fmt.Errorf("Failed to get asset: %s with error: %s", args[0], err)
-	 }
-	 if value == nil {
-		 return "", fmt.Errorf("Asset not found: %s", args[0])
-	 }
-	 fmt.Println("- end get value")
-	 return string(value), nil
+	 return stub.InvokeChaincode("sandeepxooahyuwn6yvqq", [][]byte{[]byte(args[0])}, "chus-east-1-3446d311-ec4d-4114-a27f-fa147557d718");
+	
  }
  
  // main function starts up the chaincode in the container during instantiate
