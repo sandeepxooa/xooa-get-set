@@ -32,7 +32,10 @@ func (t *SimpleAsset) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 	// Extract the function and args from the transaction proposal
 	fn, args := stub.GetFunctionAndParameters()
 
-	fmt.Println("invoke is running " + fn)
+	//fmt.Println("invoke is running " + fn)
+
+	channelId := stub.GetChannelID();
+	 fmt.Println("invoke is running " + fn+ " - Caller ::" + channelId)
 
 	var result string
 	var err error
