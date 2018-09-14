@@ -72,7 +72,7 @@
 		 return "", fmt.Errorf("Incorrect arguments. Expecting a key")
 	 }
  
-	 value, err := stub.InvokeChaincode("sandeepxooatftbruaty", args, "chus-east-1-3446d311-ec4d-4114-a27f-fa147557d718");
+	 value, err := stub.InvokeChaincode("sandeepxooahyuwn6yvqq", args, "chus-east-1-3446d311-ec4d-4114-a27f-fa147557d718");
 	 if err != nil {
 		 return "", fmt.Errorf("Failed to get asset: %s with error: %s", args[0], err)
 	 }
