@@ -40,7 +40,7 @@
  func get(stub shim.ChaincodeStubInterface, args []string) peer.Response  {
 	 fmt.Println("- start get value")
 	 
-	 return stub.InvokeChaincode("sandeepxooahyuwn6yvqq", [][]byte{[]byte(args[0])}, "chus-east-1-3446d311-ec4d-4114-a27f-fa147557d718");
+	 return stub.InvokeChaincode("sandeepxooahyuwn6yvqq", [][]byte{[]byte("get"),[]byte(args[0])}, "chus-east-1-3446d311-ec4d-4114-a27f-fa147557d718");
 	
  }
  
