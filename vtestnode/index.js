@@ -26,6 +26,7 @@ let Chaincode = class {
 
     let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
     console.log("cid", cid);
+    console.log("stub", stub);
 
     let method = this[ret.fcn];
     if (!method) {
