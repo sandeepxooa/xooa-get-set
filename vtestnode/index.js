@@ -9,10 +9,21 @@ const shim = require("fabric-shim");
 
 const ClientIdentity = require("fabric-shim").ClientIdentity;
 
-async function verifyAccess(stub) {
+async function allowAppAccess(stub) {
   let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
   let [AppId, Version] = process.env.CORE_CHAINCODE_ID_NAME.split(":");
   if (!cid.assertAttributeValue("AppId", AppId)) {
+    throw new Error("Unauthorized");
+  }
+}
+
+async function allowAccountAccess(stub) {
+  let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
+  let AccountId = cid.getAttributeValue(attrName);
+  let ChannelName = ("ch" + AccountId)
+    .toLocaleLowerCase()
+    .replace(/[^a-zA-Z0-9]/g, "-");
+  if (!ChannelName !== stub.getChannelID()) {
     throw new Error("Unauthorized");
   }
 }
@@ -35,7 +46,7 @@ let Chaincode = class {
     let method = this[ret.fcn];
 
     try {
-      await verifyAccess(stub);
+      await allowAppAccess(stub);
       if (!method) {
         console.error("no function of name:" + ret.fcn + " found");
         throw new Error("Received unknown function " + ret.fcn + " invocation");
