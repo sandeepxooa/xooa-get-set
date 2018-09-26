@@ -1,11 +1,6 @@
 Apps:
-  Xooa-Get-Set-Root:
-    Name: Get-Set-Root
-    Description: Xooa Get Set Smart Contract
-    path: /
-    language: go
   Xooa-Get-Set:
-    Name: Get-Set-sacc
+    Name: Get-Set
     Description: Xooa Get Set Smart Contract
     path: /sacc/
     language: go
@@ -18,4 +13,4 @@ Apps:
     Name: Get-Set-node
     Description: Xooa Get Set Chaincode Application
     path: /vtestnode/
-    language: node   
+    language: node
