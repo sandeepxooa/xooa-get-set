@@ -8,9 +8,14 @@ chaincodes:
     Name: Get-Set-sacc
     AppInfo: Xooa Get Set Chaincode Application
     path: /sacc/
-    language: go 
+    language: go
+  Xooa-Get-Set-Node:
+    Name: Get-Set-node
+    AppInfo: Xooa Get Set Chaincode Application
+    path: /vtestnode/
+    language: node
   Xooa-Get-Set-Access-Another-Chaincode:
     Name: Xooa-Get-Set-Access-Another-Chaincode
     AppInfo: Xooa-Get-Set-Access-Another-Chaincode
     path: /vtest/
-    language: go    
+    language: go

@@ -10,7 +10,8 @@
 	 "fmt"
  
 	 "github.com/hyperledger/fabric/core/chaincode/shim"
-	 "github.com/hyperledger/fabric/protos/peer"
+	 "github.com/hyperledger/fabric/protos/peer",
+	 "github.com/hyperledger/fabric/core/chaincode/lib/cid"
  )
  
  // SimpleAsset implements a simple chaincode to manage an asset
@@ -31,7 +32,19 @@
  func (t *SimpleAsset) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 	 // Extract the function and args from the transaction proposal
 	 fn, args := stub.GetFunctionAndParameters()
- 
+
+	 id, err := cid.GetID(stub)
+
+	 val, ok, err := cid.GetAttributeValue(stub, "affiliation")
+	if err != nil {
+	// There was an error trying to retrieve the attribute
+	}
+	if !ok {
+	// The client identity does not possess the attribute
+	}
+
+
+
 	 channelId := stub.GetChannelID();
 	 fmt.Println("invoke is running " + fn+ " - Caller ::" + channelId)
  
