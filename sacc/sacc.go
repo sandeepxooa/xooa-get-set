@@ -8,7 +8,8 @@
 
  import (
 	 "fmt"
- 
+	 "os",
+	 "strings",
 	 "github.com/hyperledger/fabric/core/chaincode/shim"
 	 "github.com/hyperledger/fabric/protos/peer",
 	 "github.com/hyperledger/fabric/core/chaincode/lib/cid"
@@ -35,15 +36,7 @@
 
 	 id, err := cid.GetID(stub)
 
-	 val, ok, err := cid.GetAttributeValue(stub, "affiliation")
-	if err != nil {
-	// There was an error trying to retrieve the attribute
-	}
-	if !ok {
-	// The client identity does not possess the attribute
-	}
-
-
+	 fmt.Println("CORE_CHAINCODE_ID_NAME:", os.Getenv("CORE_CHAINCODE_ID_NAME"))
 
 	 channelId := stub.GetChannelID();
 	 fmt.Println("invoke is running " + fn+ " - Caller ::" + channelId)
