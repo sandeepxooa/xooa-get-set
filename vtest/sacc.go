@@ -32,15 +32,15 @@
 	 fn, args := stub.GetFunctionAndParameters()
  
 	 fmt.Println("invoke is running " + fn)
-	 return get(stub, args)
+	 return get(stub, args , fn)
  }
  
  
  // Get returns the value of the specified asset key
- func get(stub shim.ChaincodeStubInterface, args []string) peer.Response  {
+ func get(stub shim.ChaincodeStubInterface, args []string, fn  string ) peer.Response  {
 	 fmt.Println("- start get value")
 	 
-	 return stub.InvokeChaincode("sandeepxooaijjbcvoix", [][]byte{[]byte("get"),[]byte(args[0])}, "chus-east-1-374f3541-2b59-45eb-aa34-db3b0d6a1061");
+	 return stub.InvokeChaincode("sandeepxooagndfr7ybu", [][]byte{[]byte(fn),[]byte(args[0])}, "chus-east-1-0433560f-ff8a-4fa4-b74d-6cc710897098");
 	
  }
  
