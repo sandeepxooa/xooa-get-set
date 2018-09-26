@@ -9,20 +9,20 @@ const shim = require("fabric-shim");
 
 const ClientIdentity = require("fabric-shim").ClientIdentity;
 
+async function verifyAccess(stub) {
+  let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
+  let [AppId, Version] = process.env.CORE_CHAINCODE_ID_NAME.split(":");
+  if (!cid.assertAttributeValue("AppId", AppId)) {
+    throw new Error("Unauthorized");
+  }
+}
+
 let Chaincode = class {
   // The Init method is called when the Smart Contract 'fabcar' is instantiated by the blockchain network
   // Best practice is to have any Ledger initialization in separate function -- see initLedger()
   async Init(stub) {
     console.info("=========== Instantiated fabcar chaincode ===========");
     return shim.success();
-  }
-
-  async verifyAccess(stub) {
-    let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
-    let [AppId, Version] = process.env.CORE_CHAINCODE_ID_NAME.split(":");
-    if (!cid.assertAttributeValue("AppId", AppId)) {
-      throw new Error("Unauthorized");
-    }
   }
 
   // The Invoke method is called as a result of an application request to run the Smart Contract
