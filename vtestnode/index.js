@@ -29,11 +29,12 @@ let Chaincode = class {
     console.log("stub", stub);
 
     let method = this[ret.fcn];
-    if (!method) {
-      console.error("no function of name:" + ret.fcn + " found");
-      throw new Error("Received unknown function " + ret.fcn + " invocation");
-    }
+
     try {
+      if (!method) {
+        console.error("no function of name:" + ret.fcn + " found");
+        throw new Error("Received unknown function " + ret.fcn + " invocation");
+      }
       let payload = await method(stub, ret.params);
       return shim.success(payload);
     } catch (err) {
