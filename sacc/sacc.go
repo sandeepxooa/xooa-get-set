@@ -34,12 +34,27 @@
 	 // Extract the function and args from the transaction proposal
 	 fn, args := stub.GetFunctionAndParameters()
 
-	 id, err := cid.GetID(stub)
 
-	 fmt.Println("CORE_CHAINCODE_ID_NAME:", os.Getenv("CORE_CHAINCODE_ID_NAME"))
+	chaincodeId :=os.Getenv("CORE_CHAINCODE_ID_NAME");
+	pair := strings.Split(chaincodeId, ":")
+	chaincodeName := pair[0];
+		
+	fmt.Println("CORE_CHAINCODE_ID_NAME:", chaincodeName)
 
-	 channelId := stub.GetChannelID();
-	 fmt.Println("invoke is running " + fn+ " - Caller ::" + channelId)
+	channelId := stub.GetChannelID();
+	accountAssertError := cid.AssertAttributeValue(stub, "ChannelId", channelId)
+	if accountAssertError != nil {
+		return shim.Error(accountAssertError.Error())
+	}
+
+	appAssertError := cid.AssertAttributeValue(stub, "AppId", chaincodeName)
+	if appAssertError != nil {
+		return shim.Error(appAssertError.Error())
+	}
+
+	
+
+	 fmt.Println("invoke is running " + fn)
  
 	 var result string
 	 var err error

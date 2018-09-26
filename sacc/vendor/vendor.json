@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "y8UGqcO/ZWyUDSrSy/ANg64vOvs=",
+			"path": "github.com/hyperledger/fabric/core/chaincode/lib/cid",
+			"revision": "37d68a18f6afa156c1145900feaa16d2f558cfe5",
+			"revisionTime": "2018-02-26T20:04:44Z"
+		}
+	],
+	"rootPath": "github.com/sandeepxooa/xooa-get-set/sacc"
+}

@@ -19,11 +19,8 @@ async function allowAppAccess(stub) {
 
 async function allowAccountAccess(stub) {
   let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
-  let AccountId = cid.getAttributeValue(attrName);
-  let ChannelName = ("ch" + AccountId)
-    .toLocaleLowerCase()
-    .replace(/[^a-zA-Z0-9]/g, "-");
-  if (!ChannelName !== stub.getChannelID()) {
+
+  if (!cid.assertAttributeValue("ChannelId", stub.getChannelID())) {
     throw new Error("Unauthorized");
   }
 }
