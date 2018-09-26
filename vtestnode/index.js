@@ -35,7 +35,7 @@ let Chaincode = class {
     let method = this[ret.fcn];
 
     try {
-      verifyAccess(stub);
+      await verifyAccess(stub);
       if (!method) {
         console.error("no function of name:" + ret.fcn + " found");
         throw new Error("Received unknown function " + ret.fcn + " invocation");
