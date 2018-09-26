@@ -14,3 +14,8 @@ Apps:
     Description: Access another app
     path: /vtest/
     language: go
+  Xooa-Get-Set-Node:
+    Name: Get-Set-node
+    Description: Xooa Get Set Chaincode Application
+    path: /vtestnode/
+    language: node   
