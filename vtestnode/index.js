@@ -43,6 +43,9 @@ let Chaincode = class {
     let method = this[ret.fcn];
 
     try {
+      //check account level access
+      await allowAccountAccess(stub);
+      //check  app level access
       await allowAppAccess(stub);
       if (!method) {
         console.error("no function of name:" + ret.fcn + " found");

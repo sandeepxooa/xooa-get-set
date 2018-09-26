@@ -35,18 +35,18 @@
 	 fn, args := stub.GetFunctionAndParameters()
 
 
-	chaincodeId :=os.Getenv("CORE_CHAINCODE_ID_NAME");
-	pair := strings.Split(chaincodeId, ":")
-	chaincodeName := pair[0];
-		
-	fmt.Println("CORE_CHAINCODE_ID_NAME:", chaincodeName)
 
+	//checking for account level access
 	channelId := stub.GetChannelID();
 	accountAssertError := cid.AssertAttributeValue(stub, "ChannelId", channelId)
 	if accountAssertError != nil {
 		return shim.Error(accountAssertError.Error())
 	}
-
+	
+	// checking for access to app
+	chaincodeId :=os.Getenv("CORE_CHAINCODE_ID_NAME");
+	pair := strings.Split(chaincodeId, ":")
+	chaincodeName := pair[0];
 	appAssertError := cid.AssertAttributeValue(stub, "AppId", chaincodeName)
 	if appAssertError != nil {
 		return shim.Error(appAssertError.Error())
