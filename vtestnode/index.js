@@ -17,6 +17,14 @@ let Chaincode = class {
     return shim.success();
   }
 
+  async verifyAccess(stub) {
+    let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
+    let [AppId, Version] = process.env.CORE_CHAINCODE_ID_NAME.split(":");
+    if (!cid.assertAttributeValue("AppId", AppId)) {
+      throw new Error("Unauthorized");
+    }
+  }
+
   // The Invoke method is called as a result of an application request to run the Smart Contract
   // 'fabcar'. The calling application program has also specified the particular smart contract
   // function to be called, with arguments
@@ -24,13 +32,10 @@ let Chaincode = class {
     let ret = stub.getFunctionAndParameters();
     console.info(ret);
 
-    let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
-    console.log("cid", cid);
-    console.log("env", process.env);
-
     let method = this[ret.fcn];
 
     try {
+      verifyAccess(stub);
       if (!method) {
         console.error("no function of name:" + ret.fcn + " found");
         throw new Error("Received unknown function " + ret.fcn + " invocation");
