@@ -4,13 +4,16 @@ Apps:
     Description: Xooa Get Set Smart Contract
     path: /sacc/
     language: go
+    README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md
   Xooa-Get-Set-Access-Another-Chaincode:
     Name: Xooa-Get-Set-Access-Another-App
     Description: Access another app
     path: /vtest/
     language: go
+    README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md
   Xooa-Get-Set-Node:
     Name: Get-Set-node
     Description: Xooa Get Set Chaincode Application
     path: /vtestnode/
     language: node
+    README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md
