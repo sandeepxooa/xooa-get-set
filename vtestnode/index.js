@@ -50,7 +50,7 @@ let Chaincode = class {
     } catch (err) {
       console.log(err);
       let shimError = shim.error(err);
-      shimError.status = 400;
+      shimError.status = 404;
       shimError.message = "Test Error";
       console.log(shimError);
       return shimError;
