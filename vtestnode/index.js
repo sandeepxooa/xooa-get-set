@@ -49,7 +49,7 @@ let Chaincode = class {
     } catch (err) {
       console.log(err);
       let shimError = shim.error(err);
-      shimError.status = 404;
+     // shimError.status = 404;
       return shimError;
     }
 
@@ -64,7 +64,7 @@ let Chaincode = class {
     } catch (err) {
       console.log(err);
       let shimError = shim.error(err);
-      shimError.status = 440;
+      //shimError.status = 440;
       return shimError;
     }
   }
