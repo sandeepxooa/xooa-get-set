@@ -50,7 +50,7 @@ let Chaincode = class {
     } catch (err) {
       console.log(err);
       let shimError = shim.error(err);
-      shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
+      shimError.status = 501;
       shimError.message = "Test Error";
       console.log(shimError);
       return shimError;
