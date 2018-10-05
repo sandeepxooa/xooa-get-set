@@ -41,21 +41,31 @@ let Chaincode = class {
     console.info(ret);
 
     let method = this[ret.fcn];
+    try {
+      if (!method) {
+        console.error("no function of name:" + ret.fcn + " found");
+        throw new Error("Received unknown function " + ret.fcn + " invocation");
+      }
+    } catch (err) {
+      console.log(err);
+      let shimError = shim.error(err);
+      shimError.status = 404;
+      return shimError;
+    }
 
     try {
       //check account level access
       await allowAccountAccess(stub);
       //check  app level access
       await allowAppAccess(stub);
-      if (!method) {
-        console.error("no function of name:" + ret.fcn + " found");
-        throw new Error("Received unknown function " + ret.fcn + " invocation");
-      }
+
       let payload = await method(stub, ret.params);
       return shim.success(payload);
     } catch (err) {
       console.log(err);
-      return shim.error(err);
+      let shimError = shim.error(err);
+      shimError.status = 440;
+      return shimError;
     }
   }
 
