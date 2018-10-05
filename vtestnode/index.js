@@ -41,34 +41,40 @@ let Chaincode = class {
   async Invoke(stub) {
     let ret = stub.getFunctionAndParameters();
     console.info(ret);
-
-    let method = this[ret.fcn];
     try {
-      if (!method) {
-        console.error("no function of name:" + ret.fcn + " found");
-        throw new Error("Received unknown function " + ret.fcn + " invocation");
+      let method = this[ret.fcn];
+      try {
+        if (!method) {
+          console.error("no function of name:" + ret.fcn + " found");
+          throw new Error(
+            "Received unknown function " + ret.fcn + " invocation"
+          );
+        }
+      } catch (err) {
+        console.log(err);
+        let shimError = shim.error(err);
+        // shimError.status = 404;
+        shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
+        return shimError;
+      }
+
+      try {
+        //check account level access
+        await allowAccountAccess(stub);
+        //check  app level access
+        await allowAppAccess(stub);
+
+        let payload = await method(stub, ret.params);
+        return shim.success(payload);
+      } catch (err) {
+        console.log(err);
+        let shimError = shim.error(err);
+        shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
+        return shimError;
       }
     } catch (err) {
       console.log(err);
-      let shimError = shim.error(err);
-     // shimError.status = 404;
-      shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
-      return shimError;
-    }
-
-    try {
-      //check account level access
-      await allowAccountAccess(stub);
-      //check  app level access
-      await allowAppAccess(stub);
-
-      let payload = await method(stub, ret.params);
-      return shim.success(payload);
-    } catch (err) {
-      console.log(err);
-      let shimError = shim.error(err);
-      shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
-      return shimError;
+      return shim.error(err);
     }
   }
 
