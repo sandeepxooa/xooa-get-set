@@ -9,6 +9,8 @@ const shim = require("fabric-shim");
 
 const ClientIdentity = require("fabric-shim").ClientIdentity;
 
+const Stub = require("fabric-shim").Stub;
+
 async function allowAppAccess(stub) {
   let cid = new ClientIdentity(stub); // "stub" is the ChaincodeStub object passed to Init() and Invoke() methods
   let [AppId, Version] = process.env.CORE_CHAINCODE_ID_NAME.split(":");
@@ -50,6 +52,7 @@ let Chaincode = class {
       console.log(err);
       let shimError = shim.error(err);
      // shimError.status = 404;
+      shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
       return shimError;
     }
 
@@ -64,7 +67,7 @@ let Chaincode = class {
     } catch (err) {
       console.log(err);
       let shimError = shim.error(err);
-      //shimError.status = 440;
+      shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
       return shimError;
     }
   }
