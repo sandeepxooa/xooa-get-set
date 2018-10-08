@@ -96,11 +96,15 @@ let Chaincode = class {
     }
     let counterValue = 0;
     let carAsBytes = await stub.getState(args[0]); //get the car from chaincode state
-    if (carAsBytes && carAsBytes.toString().length > 0) {
-       counterValue = parseInt(carAsBytes.toString());  
+    if (carAsBytes) {
+      counterValue = parseInt(carAsBytes.toString());
     }
-    
-    counterValue = counterValue - 1;
+
+    if (!counterValue) {
+      counterValue = 0;
+    } else {
+      counterValue = counterValue - 1;
+    }
     stub.setEvent("putstate", Buffer.from(String(counterValue)));
     await stub.putState(args[0], Buffer.from(String(counterValue)));
     console.info("============= END : Create Car ===========");
@@ -114,11 +118,14 @@ let Chaincode = class {
 
     let counterValue = 0;
     let carAsBytes = await stub.getState(args[0]); //get the car from chaincode state
-    if (carAsBytes && carAsBytes.toString().length > 0) {
-       counterValue = parseInt(carAsBytes.toString());  
+    if (carAsBytes) {
+      counterValue = parseInt(carAsBytes.toString());
     }
-    
-    counterValue = counterValue + 1;
+    if (!counterValue) {
+      counterValue = 0;
+    } else {
+      counterValue = counterValue - 1;
+    }
     stub.setEvent("putstate", Buffer.from(String(counterValue)));
     await stub.putState(args[0], Buffer.from(String(counterValue)));
     console.info("============= END : Create Car ===========");
