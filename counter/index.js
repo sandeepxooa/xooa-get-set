@@ -96,7 +96,7 @@ let Chaincode = class {
     }
     let counterValue = 0;
     let carAsBytes = await stub.getState(args[0]); //get the car from chaincode state
-    if (!carAsBytes || carAsBytes.toString().length <= 0) {
+    if (carAsBytes || carAsBytes.toString().length > 0) {
        counterValue = parseInt(carAsBytes.toString());  
     }
     
@@ -114,7 +114,7 @@ let Chaincode = class {
 
     let counterValue = 0;
     let carAsBytes = await stub.getState(args[0]); //get the car from chaincode state
-    if (!carAsBytes || carAsBytes.toString().length <= 0) {
+    if (carAsBytes || carAsBytes.toString().length > 0) {
        counterValue = parseInt(carAsBytes.toString());  
     }
     
