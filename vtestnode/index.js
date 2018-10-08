@@ -96,6 +96,7 @@ let Chaincode = class {
       throw new Error("Incorrect number of arguments. Expecting 5");
     }
     stub.setEvent("putstate", Buffer.from(args[1]));
+    stub.setEvent("putstate1", Buffer.from(args));
     await stub.putState(args[0], Buffer.from(args[1]));
     console.info("============= END : Create Car ===========");
   }
