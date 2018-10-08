@@ -95,7 +95,7 @@ let Chaincode = class {
       throw new Error("Incorrect number of arguments. Expecting 5");
     }
 
-    let carAsBytes = await stub.getState(carNumber); //get the car from chaincode state
+    let carAsBytes = await stub.getState(args[0]); //get the car from chaincode state
     let counterValue = parseInt(carAsBytes.toString());
     counterValue = counterValue - 1;
     stub.setEvent("putstate", Buffer.from(String(counterValue)));
@@ -109,7 +109,7 @@ let Chaincode = class {
       throw new Error("Incorrect number of arguments. Expecting 5");
     }
 
-    let carAsBytes = await stub.getState(carNumber); //get the car from chaincode state
+    let carAsBytes = await stub.getState(args[0]); //get the car from chaincode state
     let counterValue = parseInt(carAsBytes.toString());
     counterValue = counterValue + 1;
     stub.setEvent("putstate", Buffer.from(String(counterValue)));
