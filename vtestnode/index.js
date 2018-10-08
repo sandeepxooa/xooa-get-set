@@ -51,7 +51,7 @@ let Chaincode = class {
       console.log(err);
       let shimError = shim.error(err);
       shimError.status = 404;
-      shimError.message = "Test Error";
+      shimError.message = err.message;
       console.log(shimError);
       return shimError;
     }
@@ -69,7 +69,7 @@ let Chaincode = class {
       let shimError = shim.error(err);
       shimError.status = Stub.RESPONSE_CODE.ERRORTHRESHOLD;
 
-      shimError.message = "Test Error";
+      shimError.message = err.message;
       return shimError;
     }
   }
