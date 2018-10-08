@@ -17,3 +17,9 @@ Apps:
     path: /vtestnode/
     language: node
     README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md
+  Xooa-Counter:
+    Name: Counter Smartcontract
+    Description: Smart contract counter
+    path: /counter/
+    language: node
+    README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md  
