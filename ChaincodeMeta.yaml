@@ -19,3 +19,9 @@ chaincodes:
     AppInfo: Xooa-Get-Set-Access-Another-Chaincode
     path: /vtest/
     language: go
+  Xooa-Get-Set-Access-Another-Chaincode-new:
+    Name: Xooa-Get-Set-Access-Another-Chaincode
+    AppInfo: Xooa-Get-Set-Access-Another-Chaincode
+    path: /vtest/
+    language: go  
+
