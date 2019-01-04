@@ -4,7 +4,8 @@ Apps:
     Description: Xooa Get Set Smart Contract
     path: /sacc/
     language: go
-    README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md  
+    README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md 
+    version: > 1.3 
   Xooa-Get-Set-Space:
     Name: Get Set
     Description: Xooa Get Set Smart Contract
