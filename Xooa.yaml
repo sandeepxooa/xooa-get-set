@@ -33,4 +33,4 @@ Apps:
     path: /counter/
     language: node
     README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md 
-    CompatibleVersion: "1.2" 
+    CompatibleVersion: "1.2 || 1.4" 
