@@ -5,6 +5,14 @@ Apps:
     path: /sacc/
     language: go
     README: https://github.com/sandeepxooa/xooa-get-set/blob/master/README.md 
+    FunctionAndArgsDefinitions:
+    - functionName: create
+      arguments:
+      - name: Key
+        description: Key of the objects to be created
+      - name: Value
+        description: Value to be store corresponding to key
+
     
   Xooa-Get-Set-Space:
     Name: Get Set
